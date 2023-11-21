@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta property="og:title" content="What the description is">
+  <meta property="og:description" content="">
+  <title>What the description is</title>
   <script>
     window.onload = function() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -12,12 +14,16 @@
       const title = urlParams.get('title');
       if (title) {
         document.title = decodeURIComponent(title);
+        // Set the Open Graph title
+        document.querySelector('meta[property="og:title"]').setAttribute('content', decodeURIComponent(title));
       }
 
-      // Set the meta description based on the 'description' parameter
+      // Set the meta description and Open Graph description based on the 'description' parameter
       const description = urlParams.get('description');
       if (description) {
         document.querySelector('meta[name="description"]').setAttribute('content', decodeURIComponent(description));
+        // Set the Open Graph description
+        document.querySelector('meta[property="og:description"]').setAttribute('content', decodeURIComponent(description));
       }
     };
   </script>
