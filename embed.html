@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="MrBreakNFix">
-    <meta name="description" content="">
-    <meta name="keywords" content="url description embedder">
-    <title>MrBreaknfix's description maker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      // Set the title based on the 'title' parameter
+      const title = urlParams.get('title');
+      if (title) {
+        document.title = decodeURIComponent(title);
+      }
 
-    <script>
-        window.onload = function() {
-            // Get the URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-
-            // Get the 'description' parameter and set it as the meta description
-            const description = urlParams.get('description');
-            if (description) {
-                document.querySelector('meta[name="description"]').setAttribute('content', decodeURIComponent(description));
-            }
-        };
-    </script>
+      // Set the meta description based on the 'description' parameter
+      const description = urlParams.get('description');
+      if (description) {
+        document.querySelector('meta[name="description"]').setAttribute('content', decodeURIComponent(description));
+      }
+    };
+  </script>
 </head>
 <body>
-    <!-- Your page content goes here -->
-    <h1>Welcome to MrBreaknfix's description maker!</h1>
+  <h1>You can use this by using the ?title and ?description parameters!</h1>
+  <h1>For example, mrbreaknfix.com/embed?title=Custom%20Title&description=Hello%20World</h1>
 </body>
 </html>
