@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MrBreakNFix's description embeder</title>
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      const description = urlParams.get('description');
+      if (description) {
+        document.querySelector('meta[name="description"]').setAttribute('content', decodeURIComponent(description));
+      }
+    };
+  </script>
+</head>
+<body>
+  <h1>You can use this by using the ?description paramater!</h1>
+<h1>For example, mrbreaknfix.com/embed?description=Hello%20World</h1>
+</body>
+</html>
