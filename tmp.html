@@ -1,0 +1,72 @@
+# Get Startup Programs
+Write-Host "=== Startup Programs ==="
+Get-CimInstance Win32_StartupCommand | Select-Object Caption, Command, Location, User
+
+# Get Running Processes
+Write-Host "=== Running Processes ==="
+Get-Process | Select-Object ProcessName, Id, CPU, Responding, StartTime
+
+# Get System Services
+Write-Host "=== System Services ==="
+Get-Service | Select-Object DisplayName, ServiceName, Status
+
+# Get Installed Software
+Write-Host "=== Installed Software ==="
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, Publisher, DisplayVersion
+
+# Display System Information
+Write-Host "=== System Information ==="
+Get-CimInstance Win32_ComputerSystem | Select-Object Manufacturer, Model, TotalPhysicalMemory
+Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, OSArchitecture, InstallDate
+
+# Display Disk Information
+Write-Host "=== Disk Information ==="
+Get-CimInstance Win32_DiskDrive | Select-Object DeviceID, MediaType, Size, Model
+
+# Display Network Information
+Write-Host "=== Network Information ==="
+Get-NetAdapter | Select-Object Name, InterfaceDescription, MacAddress, Speed
+
+# Display Network Connection Information
+Write-Host "=== Network Connections ==="
+Get-NetTCPConnection | Select-Object LocalAddress, LocalPort, RemoteAddress, RemotePort, State
+
+# Display Firewall Rules
+Write-Host "=== Firewall Rules ==="
+Get-NetFirewallRule | Select-Object DisplayName, Direction, Action, Enabled
+
+# Display Scheduled Tasks
+Write-Host "=== Scheduled Tasks ==="
+Get-ScheduledTask | Select-Object TaskName, TaskPath, State, NextRunTime
+
+# Display Event Logs (You may want to filter this further based on specific event IDs or sources)
+Write-Host "=== Event Logs ==="
+Get-WinEvent -LogName System -MaxEvents 5 | Select-Object TimeCreated, Id, LevelDisplayName, Message
+
+# Display System Drivers
+Write-Host "=== System Drivers ==="
+Get-WmiObject Win32_SystemDriver | Select-Object DisplayName, State
+
+# Display System Environment Variables
+Write-Host "=== Environment Variables ==="
+Get-ChildItem Env:
+
+# Check for Disk Space
+Write-Host "=== Disk Space ==="
+Get-PSDrive C | Select-Object Used, Free, Size
+
+# Check for Running Antivirus
+Write-Host "=== Antivirus Information ==="
+Get-CimInstance -Namespace "root\SecurityCenter2" -ClassName AntiVirusProduct | Select-Object DisplayName, ProductState
+
+# Check for Windows Updates
+Write-Host "=== Windows Updates ==="
+Get-HotFix | Select-Object Description, InstalledOn
+
+# Check for Active Internet Connections
+Write-Host "=== Active Internet Connections ==="
+Test-NetConnection -ComputerName www.microsoft.com
+
+# Additional checks can be added based on specific needs
+
+# End of Script
