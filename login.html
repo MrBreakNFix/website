@@ -1,0 +1,64 @@
+<!--If you are confused, lmk-->
+<!--https://github.com/MrBreakNFix/website-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Login</title>
+    <link rel="stylesheet" type="text/css" href="loginstyles.css">
+
+</head>
+<body>
+<canvas id="Matrix"></canvas>
+
+<div class="container" id="loginbox">
+    <div class="login-box" style="display: none;">
+        <button class="matrix" type="button" onclick="toggleMatrix()">Toggle Matrix</button>
+
+        <!-- we display none here to stop flashing, we use javascript to re-enable it when we know it won't flash.-->
+        <h2>Hacker Login</h2>
+        <form action="control.html" method="post" onsubmit="return validateLogin();">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Access key</label>
+<!--                add a file upload for .key files, which puts the content of the file into the accesskey element-->
+                <label for="file" class="fileInput">Select key</label>
+
+                <input type="file" id="file" name="file" accept=".key">
+                <!--import key-->
+                <script>
+                    document.getElementById("file").addEventListener("change", function() {
+                        var fr = new FileReader();
+                        fr.onload = function() {
+                            document.getElementById("accesskey").value = fr.result;
+                        }
+                        fr.readAsText(this.files[0]);
+                    })
+                </script>
+
+                <label for="accesskey"></label><input type="password" id="accesskey" name="accesskey" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <button type="submit">Login</button>
+            </div>
+
+            <div class="access-denied" id="accessDenied">Access Denied</div>
+        </form>
+    </div>
+    <audio id="errorSound" src="err.mp3"></audio>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

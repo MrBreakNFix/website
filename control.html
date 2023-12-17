@@ -1,0 +1,128 @@
+<!--If you are confused, lmk-->
+<!--https://github.com/MrBreakNFix/website-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Remote Control Access Center</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #0f0;
+            margin: 20px;
+            position: relative;
+            z-index: 0; /* depth */
+        }
+
+        #Matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* puts behind other stuff */
+        }
+
+    </style>
+</head>
+
+<body>
+<canvas id="Matrix" style="display: none;"></canvas>
+
+
+<form class="main" style="display: none;">
+    <h2>Remote Control Access Center</h2>
+
+    <!--    logout button that deletes cookie-->
+    <button class="logout" type="button" onclick="logout()">Logout</button>
+    <button class="matrix" type="button" onclick="toggleMatrix()">Toggle Matrix</button>
+
+
+    <label for="data">Enter command:</label>
+    <input type="text" id="data" name="data" placeholder="process w/ args">
+
+    <button id="sendButton" type="button" onclick="sendRequest()">Send Request</button>
+
+    <div>
+        <h3>Predefined Commands</h3>
+        <button type="button" onclick="send('crash')">Bluescreen of Death</button>
+        <button type="button" onclick="send('signout')">Lock</button>
+        <button type="button" onclick="send('logout')">Logout</button>
+        <button type="button" onclick="send('shutdown60')">60 second shutdown</button>
+        <button type="button" onclick="send('shutdown10')">10 second shutdown</button>
+        <button type="button" onclick="send('shutdown')">Shutdown NOW</button>
+        <button type="button" onclick="send('calc')">Calculator</button>
+        <button type="button" onclick="send('notepad')">Notepad</button>
+        <button type="button" onclick="send('rick')">Rickroll</button>
+        <button type="button" onclick="send('vol100')">Volume 100%</button>
+        <button type="button" onclick="send('vol0')">Volume 0%</button>
+        <button type="button" onclick="send('brightness100')">Brightness 100%</button>
+        <button type="button" onclick="send('brightness0')">Brightness 0%</button>
+
+
+        <hr>
+        <h3>Predefined Scripts</h3>
+        <label for="seconds">Seconds</label>
+        <input type="text" id="seconds" name="seconds" placeholder="Seconds for scripts" value="10">
+
+        <button type="button" onclick="send('disableLoginForXSeconds')">Disable Workstation for X duration</button>
+    </div>
+
+    <hr>
+
+    <div id="fileUtilities">
+        <!--I suck at naming stuff-->
+        <h3>File Utilities</h3>
+        <label for="filePath">Small file upload utilities:</label>
+        <input type="text" id="filePath" name="filePath" placeholder="Path">
+
+        <label for="file" class="fileInput">Upload File</label>
+        <input type="file" id="file" name="file" accept="">
+
+        <button id="fileUploadButton" type="button" onclick="uploadFile()">Upload File</button>
+        <button id="downloadFileButton" type="button" onclick="downloadFile()">Download File</button>
+        <button id="runFileButton" type="button" onclick="runFile()">Run File</button>
+    </div>
+
+    <hr>
+
+    <div id="largeFileUtilities">
+        <h3>Large File Utilities</h3>
+        <label for="lfilePath">Large file upload utilities:</label>
+        <input type="text" id="lfilePath" name="lfilePath" placeholder="Path">
+        <label for="lfileUrl"></label>
+        <input type="text" id="lfileUrl" name="lfileUrl" placeholder="URL">
+        <label for="largeFileIn" class="fileInput">Upload Large File</label>
+        <input type="file" id="largeFileIn" />
+
+        <button id='largefileuploadbutton' onclick="largeFileUploadAndConvert(event)">Upload Large File</button>
+        <button id="ldownloadFileButton" type="button" onclick="downloadLargeFile()">Download Large File</button>
+        <button id="lrunFileButton" type="button" onclick="runLargeFile()">Run Large File</button>
+    </div>
+    <hr>
+
+<div id="scripting">
+    <h3>Scripting</h3>
+
+
+    <label for="importfile" class="fileInput">Upload script</label>
+    <input type="file" id="importfile" name="importfile" accept=".vbs">
+
+    <button type="button" onclick="ImportScript()">Import Script</button>
+    <button type="button" onclick="ConsoleSend()">Send Script</button>
+    <button type="button" onclick="DownloadScript()">Download Script</button>
+
+    <div id="editor">
+        <label for="editorTextarea"></label>
+        <textarea autocomplete="off" id="editorTextarea" placeholder="Type your commands..."></textarea>
+    </div>
+</div>
+
+</form>
+
+<div id="responseNotifier"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

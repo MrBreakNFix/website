@@ -1,10 +1,273 @@
+/* If you are confused, lmk*/
+/* https://github.com/MrBreakNFix/website*/
 body {
-    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    color: #0f0;
+    margin: 20px;
+}
+
+h2 {
+    color: #0f0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    margin-bottom: 10px;
+    background-color: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border: 1px solid #0f0;
+    outline: none;
+}
+
+button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0f0;
+    color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #008000;
+    color: #000;
+}
+
+button:active {
+    background-color: #ff0000 !important;
+    color: #000 !important;
+    transform: scale(0.95);
+}
+
+button:active::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ff0000 !important;
+    opacity: 0.7;
+    z-index: -1;
+    transition: opacity 2s ease;
+}
+
+
+button:active:after {
+    transition: none;
+    opacity: 0;
+}
+
+#responseNotifier {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: none;
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #0f0;
+    color: #000;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    max-width: 300px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label.fileInput {
+    display: inline-block;
+    max-width: 200px;
+    padding: 8px;
     margin: 0;
-    background: #000;
-    min-height: 100vh;
+    border: 1px solid #0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #0f0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-.terminal {
-    --size: 1.2;
-    height: 100vh;
+
+label.fileInput:hover {
+    background-color: #008000;
+    color: #000;
 }
+
+label.fileInput:active {
+    background-color: #008000;
+    color: #000;
+    transform: scale(0.95);
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+html {
+    background: black;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.countdown-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: #003808;
+    transition: width 0.55s ease;
+}
+
+hr {
+    border: 1px solid #0f0;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+}
+
+#editor {
+    width: 100%;
+    height: 50vh;
+    border: 2px solid #00ff00;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-family: 'Courier New', monospace;
+    resize: none;
+}
+
+/*div centered*/
+#sendconsolebutton {
+    position: relative;
+    left: 50%;
+}
+button.clicked {
+    background-color: #ff0000 !important;
+    color: #000 !important;
+    transform: scale(0.95);
+}
+
+button.clicked::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ff0000 !important;
+    opacity: 0.5;
+    z-index: -1;
+    transition: opacity 2s ease;
+}
+
+button.clicked:after {
+    transition: none;
+    opacity: 0;
+}
+button.logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0f0;
+    color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.logout:hover {
+    background-color: #008000;
+    color: #000;
+}
+
+button.matrix {
+    position: absolute;
+    top: 0;
+    right: 80px;
+    margin: 0;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0f0;
+    color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+button.matrix:hover {
+    background-color: #008000;
+    color: #000;
+}
+
+.main.sliding-in {
+    animation: slide-in 1.1s forwards;
+}
+
+.main.sliding-out {
+    animation: slide-out 1.1s forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(-110%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-110%);
+    }
+}
+
+canvas.matrix {
+    display: none;
+}
+
+canvas.matrix.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
