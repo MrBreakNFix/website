@@ -75,10 +75,13 @@ document.addEventListener("DOMContentLoaded", function() {
         window.history.replaceState(null, null, window.location.href);
     }
 
+
     function sendRequest() {
     var timestamp = new Date().toISOString();
     var username = "webapp";
     var data = encodeURIComponent(document.getElementById("data").value);
+    // extract url to a string
+    var url = getCookie('url');
 
     url += "?mode=responda1";
     url += "&data=" + data;
@@ -101,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   function send(action) {
-    var predefinedData = '';
+    let predefinedData = '';
 
     if (action === 'calc') {
       predefinedData = 'calc';
