@@ -121,7 +121,7 @@ body {
     }
 }
 .login-box.shake {
-    animation: shakeLoginBox 0.5s cubic-bezier(0.1, 0.1, 0.1, 0.1) infinite;
+    animation: shakeLoginBox 0.5s ease-in-out;
 }
 .login-box.sliding-out {
     animation: slideLoginBoxOut 1s ease-in-out;
@@ -130,17 +130,7 @@ body {
     animation: slideLoginBoxIn 1s ease-in-out;
 }
 
-@keyframes shakeLoginBox {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    10%, 30%, 50%, 70%, 90% {
-        transform: translateX(-5px);
-    }
-    20%, 40%, 60%, 80% {
-        transform: translateX(5px);
-    }
-}
+
 @keyframes slideLoginBoxIn {
     0% {
         transform: translateX(270%);
@@ -156,6 +146,19 @@ body {
     }
     100% {
         transform: translateX(500%); /*overshoot this to remove the flash*/
+    }
+}
+
+@keyframes shakeLoginBox {
+/*   very subtle shake*/
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-1px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(1px);
     }
 }
 
@@ -218,4 +221,10 @@ button.matrix {
 button.matrix:hover {
     background-color: #008000;
     color: #000;
+}
+
+button.matrix:active {
+    background-color: #008000;
+    color: #000;
+    transform: scale(0.95);
 }

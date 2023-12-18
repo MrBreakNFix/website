@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="loginstyles.css">
 
 </head>
-<body>
+<body class="scan-lines">
 <canvas id="Matrix"></canvas>
 
 <div class="container" id="loginbox">
@@ -20,6 +20,7 @@
         <h2>Hacker Login</h2>
         <form action="control.html" method="post" onsubmit="return validateLogin();">
             <div class="input-group">
+
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" autocomplete="off">
             </div>
@@ -58,7 +59,6 @@
     </div>
     <audio id="errorSound" src="err.mp3"></audio>
 </div>
-
 <script src="login.js"></script>
 </body>
 </html>

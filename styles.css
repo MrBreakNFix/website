@@ -17,17 +17,19 @@ label {
 }
 
 input {
-    margin-bottom: 10px;
+    padding: 8px;
+    border: 2px solid #0f0;
     background-color: #000;
     color: #0f0;
-    border: 1px solid #0f0;
-    transition: border 0.3s ease;
+    transition: border 0.3s ease, background-color 0.3s ease;
 }
 
 input:focus {
-    border: 1px solid #0f0;
+    border: 2px solid #0f0;
+    background-color: #000;
     outline: none;
 }
+
 
 button {
     padding: 8px 15px;
@@ -270,4 +272,3 @@ canvas.matrix.active {
     left: 0;
     z-index: -1;
 }
-

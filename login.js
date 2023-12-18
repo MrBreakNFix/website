@@ -90,7 +90,7 @@ function validateLogin() {
             loginBox.style.display = "none";
             document.cookie = "url=" + newUrlCookie;
             window.location.href = "control.html";
-        }, 1000);
+        }, 900);
 
         return false;
     } else {
@@ -121,3 +121,16 @@ function toggleMatrix() {
         localStorage.setItem("matrix", "none");
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    function shakeLoginBox() {
+        console.log("Input changed!");
+        const loginBox = document.querySelector(".login-box");
+        loginBox.classList.remove("sliding-in");
+        loginBox.classList.add("shake");
+        setTimeout(() => loginBox.classList.remove("shake"), 500);
+    }
+
+    document.getElementById("username").addEventListener("input", shakeLoginBox);
+    document.getElementById("password").addEventListener("input", shakeLoginBox);
+});

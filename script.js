@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         document.getElementById("Matrix").style.display = "none";
     }
+    // load last content into the console
+    var lastContent = localStorage.getItem("editor");
+    document.getElementById("editorTextarea").value = lastContent;
+
+
     document.querySelector('.main').style.display = 'block';
     document.querySelector(".main").classList.add("sliding-in");
 });
@@ -139,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
             'Next'
         predefinedData = 'vbs ' + convertToHex(vbcmd);
     }
+
     document.getElementById("data").value = predefinedData;
     sendRequest();
   }
@@ -212,6 +218,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function showResponse(message, type) {
         var responseNotifier = document.getElementById('responseNotifier');
         var countdownBar = document.createElement('div');
+        responseNotifier.style.display = 'block';
+        responseNotifier.style.opacity = '1';
 
         responseNotifier.textContent = "Wait for 10 seconds to send another message to ensure this has executed: " + message;
         responseNotifier.className = type;
@@ -228,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function () {
                 responseNotifier.style.display = 'none';
                 responseNotifier.removeChild(countdownBar);
+
             }, 500); // fade out duration
         }, 12000);
 
@@ -358,4 +367,5 @@ function toggleMatrix() {
         matrix.style.display = "none";
         localStorage.setItem("matrix", "none");
     }
+
 }

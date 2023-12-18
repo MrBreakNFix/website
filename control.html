@@ -32,7 +32,30 @@
 
 
 <form class="main" style="display: none;">
-    <h2>Remote Control Access Center</h2>
+
+    <h1>Remote Control Protocol Interception Access Hub v6.1 alpha</h1>
+<!--    ascii art container-->
+    <div id="taag_container">
+            <pre id="taag_output_text">
+
+ ____                               __           ______                                                    ____     _               ___           __
+/\  _`\                            /\ \__       /\  _  \                                                  /'___\  /' \             /\_ \         /\ \
+\ \ \L\ \     __    ___ ___     ___\ \ ,_\    __\ \ \L\ \    ___    ___     __    ____   ____      __  __/\ \__/ /\_, \         __ \//\ \   _____\ \ \___      __
+ \ \ ,  /   /'__`\/' __` __`\  / __`\ \ \/  /'__`\ \  __ \  /'___\ /'___\ /'__`\ /',__\ /',__\    /\ \/\ \ \  _``\/_/\ \      /'__`\ \ \ \ /\ '__`\ \  _ `\  /'__`\
+  \ \ \\ \ /\  __//\ \/\ \/\ \/\ \L\ \ \ \_/\  __/\ \ \/\ \/\ \__//\ \__//\  __//\__, `/\__, `\   \ \ \_/ \ \ \L\ \_\ \ \    /\ \L\.\_\_\ \\ \ \L\ \ \ \ \ \/\ \L\.\_
+   \ \_\ \_\ \____\ \_\ \_\ \_\ \____/\ \__\ \____\\ \_\ \_\ \____\ \____\ \____\/\____\/\____/    \ \___/ \ \____/\_\ \_\   \ \__/.\_/\____\ \ ,__/\ \_\ \_\ \__/.\_\
+    \/_/\/ /\/____/\/_/\/_/\/_/\/___/  \/__/\/____/ \/_/\/_/\/____/\/____/\/____/\/___/ \/___/      \/__/   \/___/\/_/\/_/    \/__/\/_\/____/\ \ \/  \/_/\/_/\/__/\/_/
+                                                                                                                                              \ \_\
+                                                                                                                                               \/_/
+</pre>
+    </div>
+
+
+    <!--    Font Name: Larry 3D-->
+<!--    push other elements down-->
+
+
+    <hr>
 
     <!--    logout button that deletes cookie-->
     <button class="logout" type="button" onclick="logout()">Logout</button>
@@ -115,8 +138,14 @@
 
     <div id="editor">
         <label for="editorTextarea"></label>
-        <textarea autocomplete="off" id="editorTextarea" placeholder="Type your commands..."></textarea>
+        <textarea autocomplete="off" id="editorTextarea" placeholder="Type your commands..." oninput="function SaveEditor() {
+            var editor = document.getElementById('editorTextarea');
+            var editorValue = editor.value;
+            localStorage.setItem('editor', editorValue);
+        }
+        SaveEditor()"></textarea>
     </div>
+
 </div>
 
 </form>
