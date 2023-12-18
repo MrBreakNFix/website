@@ -30,7 +30,6 @@ input:focus {
     outline: none;
 }
 
-
 button {
     padding: 8px 15px;
     margin-right: 10px;
@@ -40,9 +39,8 @@ button {
     cursor: pointer;
     background-color: #0f0;
     color: #000;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 2s ease, color 2s ease;
 }
-
 button:hover {
     background-color: #008000;
     color: #000;

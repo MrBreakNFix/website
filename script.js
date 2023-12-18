@@ -33,11 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
             button.addEventListener("click", function () {
                 // for making red
                 button.classList.add("clicked");
-
-                // removes red after 2
                 setTimeout(function () {
                     button.classList.remove("clicked");
-                }, 2000);
+                }, 5000);
             });
         });
     });
@@ -238,11 +236,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 responseNotifier.removeChild(countdownBar);
 
             }, 500); // fade out duration
-        }, 12000);
+        }, 14000);
 
         // Updates bar per 100ms
         var startTime = Date.now();
-        var duration = 12000;
+        var duration = 14000;
         var interval = setInterval(function () {
             var elapsed = Date.now() - startTime;
             var remainingWidth = 100 - (elapsed / duration) * 100;
