@@ -150,8 +150,10 @@ document.addEventListener("DOMContentLoaded", function() {
           predefinedData = 'vbs ' + convertToHex(vbcmd);
       } else if (action === 'lockWorkstationForXSeconds') {
           console.log(document.getElementById("lock").value)
-          predefinedData = 'lockWS ' + document.getElementById("seconds").value + " " + document.getElementById("lock").value;
-            //todo add custom image to lockworkstation
+
+          predefinedData = ('lockWS ' + document.getElementById("seconds").value + " " + document.getElementById("lock").value + "")
+
+          //todo add custom image to lockworkstation
 
       } else if (action === 'disableKeyboardForXSeconds') {
             vbcmd = 'Set WshShell = WScript.CreateObject("WScript.Shell")\n' +
