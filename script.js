@@ -107,41 +107,48 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   function send(action) {
-    let predefinedData = '';
+      let predefinedData = '';
 
-    if (action === 'calc') {
-      predefinedData = 'calc';
-    } else if (action === 'notepad') {
-      predefinedData = 'notepad';
-    } else if (action === 'shutdown60') {
-      predefinedData = 'shutdown -r -t 60';
-    } else if (action === 'shutdown10') {
-      predefinedData = 'shutdown -s -t 60';
-    } else if (action === 'shutdown') {
-      predefinedData = 'shutdown -s -t 0';
-    } else if (action === 'logout') {
-      predefinedData =  'shutdown -l';
-    } else if (action === 'signout') {
-      predefinedData = 'rundll32.exe user32.dll,LockWorkStation';
-    } else if (action === 'rick') {
-      predefinedData = 'url https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-    } else if (action === 'vol100') {
-      predefinedData = 'mshta \"javascript:function r(){var s=new ActiveXObject(\'WScript.Shell\');for(var i=0;i<100;i++)s.SendKeys(String.fromCharCode(0xAF))}r();close()"';
-    } else if (action === 'vol0') {
-      predefinedData = 'mshta \"javascript:function r(){var s=new ActiveXObject(\'WScript.Shell\');for(var i=0;i<100;i++)s.SendKeys(String.fromCharCode(0xAE))}r();close()"';
-    } else if (action === 'brightness100') {
-      predefinedData = 'mshta \"javascript:function r(){var s=new ActiveXObject(\'WScript.Shell\');for(var i=0;i<100;i++)s.SendKeys(String.fromCharCode(0xBB))}r();close()"';
-    } else if (action === 'brightness0') {
-      predefinedData = 'mshta \"javascript:function r(){var s=new ActiveXObject(\'WScript.Shell\');for(var i=0;i<100;i++)s.SendKeys(String.fromCharCode(0xBD))}r();close()"';
-    } else if (action === 'crash') {
-        predefinedData = 'crash';
-    } else if (action === 'disableLoginForXSeconds') {
-        seconds = document.getElementById("seconds").value;
-        vbcmd = 'For t=Timer To Timer+' + seconds +'\n' +
-            '    Do:CreateObject("WScript.Shell").Run "rundll32.exe user32.dll,LockWorkStation",0,True:Loop While Timer<t\n' +
-            'Next'
-        predefinedData = 'vbs ' + convertToHex(vbcmd);
-    }
+      if (action === 'calc') {
+          predefinedData = 'calc';
+      } else if (action === 'notepad') {
+          predefinedData = 'notepad';
+      } else if (action === 'shutdown60') {
+          predefinedData = 'shutdown -r -t 60';
+      } else if (action === 'shutdown10') {
+          predefinedData = 'shutdown -s -t 60';
+      } else if (action === 'shutdown') {
+          predefinedData = 'shutdown -s -t 0';
+      } else if (action === 'logout') {
+          predefinedData = 'shutdown -l';
+      } else if (action === 'signout') {
+          predefinedData = 'rundll32.exe user32.dll,LockWorkStation';
+      } else if (action === 'rick') {
+          predefinedData = 'url https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      } else if (action === 'vol100') {
+          predefinedData = 'mshta \"javascript:function r(){var s=new ActiveXObject(\'WScript.Shell\');for(var i=0;i<100;i++)s.SendKeys(String.fromCharCode(0xAF))}r();close()"';
+      } else if (action === 'vol0') {
+          predefinedData = 'mshta \"javascript:function r(){var s=new ActiveXObject(\'WScript.Shell\');for(var i=0;i<100;i++)s.SendKeys(String.fromCharCode(0xAE))}r();close()"';
+      } else if (action === 'crash') {
+          predefinedData = 'crash';
+      } else if (action === 'disableLoginForXSeconds') {
+          vbcmd = 'For t=Timer To Timer+' + document.getElementById("seconds").value + '\n' +
+              '    Do:CreateObject("WScript.Shell").Run "rundll32.exe user32.dll,LockWorkStation",0,True:Loop While Timer<t\n' +
+              'Next'
+          predefinedData = 'vbs ' + convertToHex(vbcmd);
+      } else if (action === 'disableMouseForXSeconds') {
+
+          vbcmd = 'Set WshShell = WScript.CreateObject("WScript.Shell")\n' +
+              'For t = Timer To Timer+' + document.getElementById("seconds").value + '\n' +
+              'Do\n' +
+              '    Randomize\n' +
+              '    x = 0\n' +
+              '    y = 0\n' +
+              '    WshShell.Run "rundll32 user32.dll,SetCursorPos " & xCoord & "," & yCoord\n' +
+              'Loop While Timer < t\n' +
+              'Next'
+          predefinedData = 'vbs ' + convertToHex(vbcmd);
+      }
 
     document.getElementById("data").value = predefinedData;
     sendRequest();
