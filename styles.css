@@ -29,7 +29,10 @@ input:focus {
     background-color: #000;
     outline: none;
 }
-
+.spacer {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+}
 button {
     padding: 8px 15px;
     margin-right: 10px;

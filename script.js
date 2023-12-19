@@ -148,6 +148,27 @@ document.addEventListener("DOMContentLoaded", function() {
               'Loop While Timer < t\n' +
               'Next'
           predefinedData = 'vbs ' + convertToHex(vbcmd);
+      } else if (action === 'lockWorkstationForXSeconds') {
+          predefinedData = 'lockWS ' +
+              document.getElementById("seconds").value + " " +
+              document.getElementById("lock").value;
+            //todo add custom image to lockworkstation
+
+      } else if (action === 'disableKeyboardForXSeconds') {
+            vbcmd = 'Set WshShell = WScript.CreateObject("WScript.Shell")\n' +
+                'For t = Timer To Timer+' + document.getElementById("seconds").value + '\n' +
+                'Do\n' +
+                '    WshShell.SendKeys "{CAPSLOCK}"\n' +
+                '    WshShell.SendKeys "{NUMLOCK}"\n' +
+                '    WshShell.SendKeys "{SCROLLLOCK}"\n' +
+                'Loop While Timer < t\n' +
+                'Next'
+            predefinedData = 'vbs ' + convertToHex(vbcmd);
+      } else if (action === 'disableMouseForXSecondsV2') {
+          // use DLL files to disable mouse
+            // https://stackoverflow.com/questions/521661/how-to-disable-mouse-and-keyboard-input-in-c-sharp
+            vbcmd = ''
+          predefinedData = 'vbs ' + convertToHex(vbcmd);
       }
 
     document.getElementById("data").value = predefinedData;
