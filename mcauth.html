@@ -19,9 +19,9 @@
         div {
             text-align: center;
             padding: 20px;
-            background-color: #333; 
+            background-color: #333;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         button {
@@ -54,10 +54,12 @@
 <div>
     <h2>Add Minecraft Account</h2>
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" placeholder="Enter your username">
+    <form onsubmit="event.preventDefault(); updateCode();">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username" autocomplete="off" required>
 
-    <button id="submitButton" onclick="updateCode()">Add</button>
+        <button id="submitButton" type="submit">Add</button>
+    </form>
 </div>
 
 <script>
@@ -79,10 +81,13 @@
         var script = document.createElement('script');
         script.src = api + '?callback=' + callbackName + '&jsonData=' + JSON.stringify(paramsObject);
 
-        window[callbackName] = function(response) {
+        var button = document.getElementById('submitButton');
+
+        var handleResponse = function(response) {
             console.log('Request successful. Response:', response);
 
-            document.getElementById('submitButton').disabled = true;
+            button.disabled = true;
+            document.removeEventListener('keydown', handleEnterKey);
 
             if (response.status === 'success') {
                 window.location.href = 'https://mrbreaknfix.com/success';
@@ -90,6 +95,18 @@
                 window.location.href = 'https://mrbreaknfix.com/failed';
             }
         };
+
+        var handleEnterKey = function(event) {
+            if (event.key === 'Enter') {
+                updateCode();
+            }
+        };
+
+        window[callbackName] = handleResponse;
+
+        button.disabled = true;
+
+        document.addEventListener('keydown', handleEnterKey);
 
         document.body.appendChild(script);
     }
