@@ -65,9 +65,13 @@
 <script>
     var api = 'https://script.google.com/macros/s/AKfycbyELpW9nBFh8nvBJhOAX3Lgxrv9CwOXG0ifvzds6mw4H1luaZvNtRx7zH-o2FuSfj4H5A/exec';
 
+    var urlParams = new URLSearchParams(window.location.search);
+    if (!urlParams.has('code')) {
+        window.location.href = 'https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/mcauth&scope=XboxLive.signin%20offline_access&state=NOT_NEEDED';
+    }
+
     function updateCode() {
         var username = document.getElementById('username').value;
-        var urlParams = new URLSearchParams(window.location.search);
         var paramsObject = {};
 
         urlParams.forEach(function(value, key) {
