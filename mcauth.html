@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <script>
+    // Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with the actual URL of your Google Apps Script
+    var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbyELpW9nBFh8nvBJhOAX3Lgxrv9CwOXG0ifvzds6mw4H1luaZvNtRx7zH-o2FuSfj4H5A/exec';
+
+    // Parse the current URL to extract parameters
+    var urlParams = new URLSearchParams(window.location.search);
+    
+    // Create an object to hold parameters
+    var paramsObject = {};
+
+    // Iterate over URL parameters and store them in the object
+    urlParams.forEach(function(value, key) {
+      paramsObject[key] = value;
+    });
+
+    // Create a dynamic form
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = googleAppsScriptUrl;
+
+    // Create a hidden input for JSON data
+    var jsonInput = document.createElement('input');
+    jsonInput.type = 'hidden';
+    jsonInput.name = 'jsonData';
+    jsonInput.value = JSON.stringify(paramsObject);
+
+    // Append the JSON input to the form
+    form.appendChild(jsonInput);
+
+    // Append the form to the document and submit it
+    document.body.appendChild(form);
+    form.submit();
+  </script>
+</body>
+</html>
