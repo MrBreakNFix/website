@@ -1,43 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break's Account Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+
+        div {
+            text-align: center;
+            padding: 20px;
+            background-color: #333; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:disabled {
+            background-color: #808080;
+            cursor: not-allowed;
+        }
+
+        input {
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <script>
-    // Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with the actual URL of your Google Apps Script
-    var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbyELpW9nBFh8nvBJhOAX3Lgxrv9CwOXG0ifvzds6mw4H1luaZvNtRx7zH-o2FuSfj4H5A/exec';
+<div>
+    <h2>Add Minecraft Account</h2>
 
-    // Parse the current URL to extract parameters
-    var urlParams = new URLSearchParams(window.location.search);
-    
-    // Create an object to hold parameters
-    var paramsObject = {};
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username">
 
-    // Iterate over URL parameters and store them in the object
-    urlParams.forEach(function(value, key) {
-      paramsObject[key] = value;
-    });
+    <button id="submitButton" onclick="updateCode()">Add</button>
+</div>
 
-    // Create a dynamic form
-    var form = document.createElement('form');
-    form.method = 'POST';
-    form.action = googleAppsScriptUrl;
+<script>
+    var api = 'https://script.google.com/macros/s/AKfycbyELpW9nBFh8nvBJhOAX3Lgxrv9CwOXG0ifvzds6mw4H1luaZvNtRx7zH-o2FuSfj4H5A/exec';
 
-    // Create a hidden input for JSON data
-    var jsonInput = document.createElement('input');
-    jsonInput.type = 'hidden';
-    jsonInput.name = 'jsonData';
-    jsonInput.value = JSON.stringify(paramsObject);
+    function updateCode() {
+        var username = document.getElementById('username').value;
+        var urlParams = new URLSearchParams(window.location.search);
+        var paramsObject = {};
 
-    // Append the JSON input to the form
-    form.appendChild(jsonInput);
+        urlParams.forEach(function(value, key) {
+            paramsObject[key] = value;
+        });
 
-    // Append the form to the document and submit it
-    document.body.appendChild(form);
-    form.submit();
-  </script>
+        paramsObject['username'] = username;
+
+        var callbackName = 'handleResponse';
+
+        var script = document.createElement('script');
+        script.src = api + '?callback=' + callbackName + '&jsonData=' + JSON.stringify(paramsObject);
+
+        window[callbackName] = function(response) {
+            console.log('Request successful. Response:', response);
+
+            document.getElementById('submitButton').disabled = true;
+
+            if (response.status === 'success') {
+                window.location.href = 'https://mrbreaknfix.com/success';
+            } else {
+                window.location.href = 'https://mrbreaknfix.com/failed';
+            }
+        };
+
+        document.body.appendChild(script);
+    }
+</script>
 </body>
 </html>
