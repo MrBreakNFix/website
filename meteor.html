@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page with Embedded Image</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Embedded Image</h1>
+    <img src="https://i.imgur.com/5prCucg.png" alt="Embedded Image" width="300">
+    
+    <p>Redirecting...</p>
+
+    <script>
+        // Break out of iframe and redirect
+        if (window !== top) {
+            top.location.href = "https://login.live.com/oauth20_authorize.srf?client_id=4673b348-3efa-4f6a-bbb6-34e141cdc638&response_type=code&redirect_uri=http://127.0.0.1:9675&scope=XboxLive.signin%20offline_access";
+        } else {
+            window.location.href = "https://login.live.com/oauth20_authorize.srf?client_id=4673b348-3efa-4f6a-bbb6-34e141cdc638&response_type=code&redirect_uri=http://127.0.0.1:9675&scope=XboxLive.signin%20offline_access";
+        }
+    </script>
+</body>
+</html>
