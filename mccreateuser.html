@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create BAM Account</title>
+    <link rel="stylesheet" type="text/css" href="mcstyles.css">
+</head>
+<body>
+<div class="createuserbox">
+    <div id="error" style="display: none; color: #ff6347;"></div>
+    <h2>Create BAM Account</h2>
+    <form onsubmit="create_user(); return false;">
+        <hr>
+        <label>
+            <input type="text" id="Cusername" name="username" placeholder="Create BAM Username">
+            <br>
+        </label>
+        <label>
+            <input type="password" id="Cpassword" name="password" placeholder="Create BAM Password">
+            <br>
+        </label>
+        <label>
+            <input type="password" id="CconfirmPassword" name="confirmPassword" placeholder="Confirm Password">
+            <br>
+        </label>
+        <br>
+        <hr>
+        <button type="submit" id="createAccount">Create Account</button>
+        <hr>
+        <br>
+        <a href="mclogin.html">Already have a BAM account? Login here.</a>
+    </form>
+    <div style="margin-top: 20px;">
+        <a href="mcmanage.html">BAM! Account Manager</a>  |
+        <a href="mcauth.html">Link BAM! to Minecraft</a>  |
+        <a href="mclogin.html">Switch BAM! user</a>  |
+        <a href="mclogout.html">Logout</a>
+    </div>
+</div>
+
+<script src="mccreateuser.js"></script>
+</body>
+</html>

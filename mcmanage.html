@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break's Account Manager</title>
+    <link rel="stylesheet" type="text/css" href="mcstyles.css">
+</head>
+<body>
+<div>
+    <div id="error" style="display: none; color: #ff6347;"></div>
+    <h2>BAM Manager</h2>
+    <p>Logged in as: <u id="username"></u></p>
+
+    <hr>
+    <button id="refresh_account_list">Refresh List</button>
+    <br>
+
+    <br>
+    <div id="accountList"></div>
+
+    <hr>
+    <label for="inviteCode"></label>
+    <input type="text" id="inviteCode" placeholder="Invite Code">
+    <button id="acceptinvite">Accept Invite</button>
+    <br>
+    <small>To create an invitation, type in a code, and push the <u>invite</u> button</small>
+    <br>
+    <small></small>
+    <small>Invites last 24 hours.</small>
+
+
+    <hr>
+
+    <p>Click <a href="mcauth.html">here</a> to link a Minecraft account.</p>
+    <small>Wrong BAM account? click <a href="mclogout.html">here</a> to switch/logout.</small>
+    <div style="margin-top: 20px;">
+        <a href="mcmanage.html">BAM! Account Manager</a>  |
+        <a href="mcauth.html">Link BAM! to Minecraft</a>  |
+        <a href="mclogin.html">Switch BAM! user</a>  |
+        <a href="mclogout.html">Logout</a>
+    </div>
+</div>
+
+
+<script src="manage.js"></script>
+</body>
+</html>

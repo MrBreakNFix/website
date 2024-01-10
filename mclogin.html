@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BAM Login Page</title>
+    <link rel="stylesheet" type="text/css" href="mcstyles.css">
+</head>
+<body>
+<div class="loginbox">
+    <div id="error" style="display: none; color: #ff6347;"></div>
+    <h2>Breaks Account Manager (BAM) login</h2>
+    <form onsubmit="mc_login(); return false;">
+        <hr>
+        <label>
+            <input type="text" id="Busername" name="username" placeholder="Enter BAM Username">
+        </label>
+        <label>
+            <input type="password" id="Bpassword" name="password" placeholder="Enter BAM Password">
+        </label>
+        <br>
+        <hr>
+        <button type="submit" id="login">Login</button>
+        <hr>
+        <br>
+        <a href="mcresetpassword.html">Forgot Password?</a>
+        <br>
+        <br>
+        <a href="mccreateuser.html">Don't have a BAM account?</a>
+    </form>
+    <div style="margin-top: 20px;">
+        <a href="mcmanage.html">BAM! Account Manager</a>  |
+        <a href="mcauth.html">Link BAM! to Minecraft</a>  |
+        <a href="mclogin.html">Switch BAM! user</a>  |
+        <a href="mclogout.html">Logout</a>
+    </div>
+</div>
+
+<script src="mclogin.js"></script>
+</body>
+</html>

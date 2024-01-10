@@ -1,119 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Break's Account Manager</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #1e1e1e;
-            color: #fff;
-        }
-
-        div {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        button {
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #6c757d;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button:disabled {
-            background-color: #808080;
-            cursor: not-allowed;
-        }
-
-        input {
-            margin-top: 10px;
-            padding: 8px;
-            font-size: 14px;
-        }
-
-        h2 {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="mcstyles.css">
 </head>
 <body>
 <div>
-    <h2>Add Minecraft Account</h2>
+    <div id="error" style="display: none; color: #ff6347;"></div>
+    <h2>Link BAM to Minecraft</h2>
 
     <form onsubmit="event.preventDefault(); updateCode();">
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter your username" autocomplete="off" required>
-
+        <hr>
+        <label for="username">Link <u id="bamusername"></u> (BAM account) to: </label>
+        <input type="text" id="username" placeholder="Enter your Minecraft username" autocomplete="off" required>
         <button id="submitButton" type="submit">Add</button>
     </form>
+    <hr>
+    <p>Transparency notice: Clicking "Add", will allow people who you, invite to be able to use your Minecraft account!</p>
+    <p>Do NOT share your invite codes with ANYONE you do not trust, as it allows them to access YOUR minecraft account.</p>
+    <p>You can change this at any time <a href="https://account.live.com/consent/Manage">here</a> by removing BAM.</p>
+    <hr>
+    <p>This page is for linking your Minecraft account, to your BAM account.</p>
+    <p>If you have already linked your accounts, you may create invites and manage accounts <a href="mcmanage.html">here</a></p>
+    <hr>
+    <small>Wrong MC account? click <a href="https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/mcauth&scope=XboxLive.signin%20offline_access&prompt=select_account">here</a> to select a different one.</small>
+    <br>
+    <small>Wrong BAM account? click <a href="mclogout.html">here</a> to switch/logout.</small>
+    <div style="margin-top: 20px;">
+        <a href="mcmanage.html">BAM! Account Manager</a>  |
+        <a href="mcauth.html">Link BAM! to Minecraft</a>  |
+        <a href="mclogin.html">Switch BAM! user</a>  |
+        <a href="mclogout.html">Logout</a>
+    </div>
+
+
 </div>
 
-<script>
-    var api = 'https://script.google.com/macros/s/AKfycbyELpW9nBFh8nvBJhOAX3Lgxrv9CwOXG0ifvzds6mw4H1luaZvNtRx7zH-o2FuSfj4H5A/exec';
+<script src="utils.js"></script>
+<script src="api.js"></script>
+<script src="add.js"></script>
 
-    var urlParams = new URLSearchParams(window.location.search);
-    if (!urlParams.has('code')) {
-        window.location.href = 'https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/mcauth&scope=XboxLive.signin%20offline_access&state=NOT_NEEDED';
-    }
-
-    function updateCode() {
-        var username = document.getElementById('username').value;
-        var paramsObject = {};
-
-        urlParams.forEach(function(value, key) {
-            paramsObject[key] = value;
-        });
-
-        paramsObject['username'] = username;
-
-        var callbackName = 'handleResponse';
-
-        var script = document.createElement('script');
-        script.src = api + '?callback=' + callbackName + '&jsonData=' + JSON.stringify(paramsObject);
-
-        var button = document.getElementById('submitButton');
-
-        var handleResponse = function(response) {
-            console.log('Request successful. Response:', response);
-
-            button.disabled = true;
-            document.removeEventListener('keydown', handleEnterKey);
-
-            if (response.status === 'success') {
-                window.location.href = 'https://mrbreaknfix.com/success';
-            } else {
-                window.location.href = 'https://mrbreaknfix.com/failed';
-            }
-        };
-
-        var handleEnterKey = function(event) {
-            if (event.key === 'Enter') {
-                updateCode();
-            }
-        };
-
-        window[callbackName] = handleResponse;
-
-        button.disabled = true;
-
-        document.addEventListener('keydown', handleEnterKey);
-
-        document.body.appendChild(script);
-    }
-</script>
 </body>
 </html>
