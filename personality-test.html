@@ -1,0 +1,115 @@
+<!--this was made at 1 am on a tuseday morning, this is what coders do when they are bored...-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="personality.css">
+    <title>Personality Test</title>
+</head>
+
+<body>
+
+<div class="container" id="cont">
+    <h1 id="title">Personality Test</h1>
+    <form id="personalityForm">
+        <div id="page1">
+            <p>1.  In social situations, how do you feel?</p>
+            <label class="question"><input type="radio" name="q1" value="A" > Drained and in need of alone time</label>
+            <label class="question"><input type="radio" name="q1" value="B" > Energized and outgoing</label>
+            <label class="question"><input type="radio" name="q1" value="C" > Wishing to become the next leader of the USSR</label>
+            <button type="button" onclick="navigate('page1', 'page2', 'forward')">Next</button>
+        </div>
+
+        <div id="page2" style="display: none;">
+            <p>2. How do you prefer to spend your weekends?</p>
+            <label class="question"><input type="radio" name="q2" value="B" > Socializing with friends and attending events</label>
+            <label class="question"><input type="radio" name="q2" value="A" > Relaxing alone or with a close friend</label>
+            <label class="question"><input type="radio" name="q2" value="C" > Booking a one-way ticket to Russia for some quality Kremlin time</label>
+            <button type="button" onclick="navigate('page2', 'page1', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page2', 'page3', 'forward')">Next</button>
+        </div>
+
+        <div id="page3" style="display: none;">
+            <p>3. When making decisions, do you rely more on your personal thoughts and feelings, or seek input from others?</p>
+            <label class="question"><input type="radio" name="q3" value="A"> Input from others</label>
+            <label class="question"><input type="radio" name="q3" value="C"> No, I need to check in with Putin for life advice and political wisdom</label>
+            <label class="question"><input type="radio" name="q3" value="B"> Personal thoughts and feelings</label>
+            <button type="button" onclick="navigate('page3', 'page2', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page3', 'page4', 'forward')">Next</button>
+        </div>
+
+        <div id="page4" style="display: none;">
+            <p>4. a party, are you more likely to be the center of attention or enjoy observing from the sidelines?</p>
+            <label class="question"><input type="radio" name="q4" value="A"> Center of attention</label>
+            <label class="question"><input type="radio" name="q4" value="B"> Observing from the sidelines</label>
+            <label class="question"><input type="radio" name="q4" value="C"> Trying to out-dance Putin at the next grand Soviet celebration</label>
+            <button type="button" onclick="navigate('page4', 'page3', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page4', 'page5', 'forward')">Next</button>
+        </div>
+
+        <div id="page5" style="display: none;">
+            <p>5. How do you recharge after a busy day?</p>
+            <label class="question"><input type="radio" name="q5" value="C"> Attending secret meetings with Russian spies to boost energy levels</label>
+            <label class="question"><input type="radio" name="q5" value="B"> Having quiet, alone time</label>
+            <label class="question"><input type="radio" name="q5" value="A"> Spending time with friends</label>
+            <button type="button" onclick="navigate('page5', 'page4', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page5', 'page6', 'forward')">Next</button>
+        </div>
+
+        <div  id="page6" style="display: none;">
+            <p>6. In group projects, do you prefer taking the lead or contributing ideas from behind the scenes?</p>
+            <label class="question"><input type="radio" name="q6" value="A"> Contributing ideas from behind the scenes</label>
+            <label class="question"><input type="radio" name="q6" value="B"> Taking the lead</label>
+            <label class="question"><input type="radio" name="q6" value="C"> Organizing a communist takeover of the project without anyone noticing</label>
+            <button type="button" onclick="navigate('page6', 'page5', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page6', 'page7', 'forward')">Next</button>
+        </div>
+
+        <div  id="page7" style="display: none;">
+            <p>7. When meeting new people, are you usually the first to initiate conversation or do you wait for others to approach you?:</p>
+            <label class="question"><input type="radio" name="q7" value="B"> First to initiate conversation</label>
+            <label class="question"><input type="radio" name="q7" value="C"> I don't meet new people. I just think about the USSR</label>
+            <label class="question"><input type="radio" name="q7" value="A"> Wait for others to approach</label>
+            <button type="button" onclick="navigate('page7', 'page6', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page7', 'page8', 'forward')">Next</button>
+        </div>
+
+        <div id="page8" style="display: none;">
+            <p>8. During conflicts, do you prefer discussing the issue openly or taking time to reflect on your own before addressing it?</p>
+            <label class="question"><input type="radio" name="q8" value="A"> Reflecting on your own before addressing it</label>
+            <label class="question"><input type="radio" name="q8" value="B"> Discussing openly</label>
+            <label class="question"><input type="radio" name="q8" value="C"> I call up the russians hotline and ask for assistance</label>
+            <button type="button" onclick="navigate('page8', 'page7', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page8', 'page9', 'forward')">Next</button>
+        </div>
+
+        <div id="page9" style="display: none;">
+            <p>9. How do you handle stress?</p>
+            <label class="question"><input type="radio" name="q9" value="A"> Seeking support from others</label>
+            <label class="question"><input type="radio" name="q9" value="B"> Reflecting and managing stress on your own</label>
+            <label class="question"><input type="radio" name="q9" value="C"> Dreaming of a stress-free life as Putin's personal advisor</label>
+            <button type="button" onclick="navigate('page9', 'page8', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page9', 'page10', 'forward')">Next</button>
+        </div>
+
+        <div id="page10" style="display: none;">
+            <p>10. When planning a trip, do you prefer group activities and social events, or solo exploration and downtime?</p>
+            <label class="question"><input type="radio" name="q10" value="A" > Solo exploration and downtime</label>
+            <label class="question"><input type="radio" name="q10" value="B" > Group activities and social events</label>
+            <label class="question"><input type="radio" name="q10" value="C" > IM GOING TO RUSSIA BAAAAABBBBBBY!!!1!!1!1!</label>
+            <button type="button" onclick="navigate('page10', 'page9', 'backward')">Back</button>
+            <button type="button" onclick="navigate('page10', 'resultPage', 'forward')">Submit</button>
+        </div>
+
+        <div id="resultPage" style="display: none;">
+            <p>Thank you for completing the personality test!</p>
+        </div>
+    </form>
+</div>
+
+<script src="personality.js"></script>
+</body>
+
+</html>
