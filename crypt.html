@@ -96,6 +96,8 @@
         const encryptedText = encryptedArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
 
         alert('Encrypted Text: ' + encryptedText);
+        console.log(encryptedText)
+
     }
 
     async function decryptText() {
