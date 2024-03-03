@@ -98,12 +98,16 @@
             secret += characters.charAt(Math.floor(Math.random() * characters.length));
         }
 
-        secret = secret.replace(/(.{4})/g, '$1 ');
+        niceSecret = secret.replace(/(.{4})/g, '$1 ');
 
         document.getElementById('secret').textContent = '';
+        document.getElementById('realSecret').textContent = '';
+
         document.getElementById('qrcode').innerHTML = '';
 
-        document.getElementById('secret').textContent = secret;
+        document.getElementById('secret').textContent = niceSecret;
+        document.getElementById('realSecret').textContent = secret;
+
 
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: secret,
@@ -114,7 +118,9 @@
 
     function copyCode() {
         var secretElement = document.getElementById('secret');
-        var secretText = secretElement.textContent;
+        var realSecretElement = document.getElementById('realSecret');
+
+        var secretText = realSecretElement.textContent;
         var tempInput = document.createElement('input');
         document.body.appendChild(tempInput);
         tempInput.value = secretText;
