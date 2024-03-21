@@ -1,0 +1,30 @@
+{
+  "MrBreakNFix": "https://cdn.discordapp.com/attachments/806281423106867210/1040514353151082527/Break.png",
+  "325e9fca-fa96-429b-996b-0dc123be3b2d": "https://cdn.discordapp.com/attachments/806281423106867210/1040514353151082527/Break.png",
+  "MrFixNBreak": "https://cdn.discordapp.com/attachments/806281423106867210/1040514353151082527/Break.png",
+  "d8f5cc74-c3d8-419f-8e66-e4ad7a83096a": "https://cdn.discordapp.com/attachments/806281423106867210/1040514353151082527/Break.png",
+  "Rubricube": "https://cdn.discordapp.com/attachments/806281423106867210/1040514353151082527/Break.png",
+  "8d943cae-72b1-4c0e-b808-db6b92de7a21": "https://cdn.discordapp.com/attachments/806281423106867210/1040514353151082527/Break.png",
+  "87ac": "https://cdn.discordapp.com/attachments/806281423106867210/1040521521338253332/87ac.png",
+  "4d45d3b5-5a97-4f68-aa23-fd47d0a46536": "https://cdn.discordapp.com/attachments/806281423106867210/1040521521338253332/87ac.png",
+  "86ac": "https://cdn.discordapp.com/attachments/806281423106867210/1040521521338253332/87ac.png",
+  "490244df-68b7-4180-9dcd-7a4e894fc899": "https://cdn.discordapp.com/attachments/806281423106867210/1040521521338253332/87ac.png",
+  "85ac_Goblin": "https://cdn.discordapp.com/attachments/806281423106867210/1040521521338253332/87ac.png",
+  "64e44f8f-b5c9-43d5-9f77-c6c9cb5531ad": "https://cdn.discordapp.com/attachments/806281423106867210/1040521521338253332/87ac.png",
+  "Coderx_Gamer": "https://cdn.discordapp.com/attachments/979388755133747280/1040610211209158676/devcoder.png",
+  "b5257d2f-fddd-419a-a9c3-dacee400119d": "https://cdn.discordapp.com/attachments/979388755133747280/1040610211209158676/devcoder.png",
+  "CerebralMayhem": "https://cdn.discordapp.com/attachments/921264961035067422/1041443442917642322/CerebralMayhemCape.png",
+  "28589f16-fc46-4129-8ab0-b8e4089b88fb": "https://cdn.discordapp.com/attachments/921264961035067422/1041443442917642322/CerebralMayhemCape.png",
+   "ToeJee": "https://cdn.discordapp.com/attachments/921264961035067422/1041440770344878161/ToeJeeCape.png", "fdcdba3e-3ce0-4d46-aa98-ac4a0469588b": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"I_Got_You_Dead": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "c37ecc77-d70f-48b9-bb25-a8efe2ef9083": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"50kdr": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "973dbbc1-4472-4ed0-9562-16a20a34fad1": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"Im_Stayin_Alive": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "d39a1c46-246c-4954-ae81-67693cdcf717": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"1493029": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "1d7fd8e2-7fcb-466d-828c-bf0e40362942": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"1sKq": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "92ec869f-0b96-4302-b98a-7c9412cf9225": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"_txsla": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "840cde83-5a55-4350-83db-82c037a51866": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+"FurryOctoGoggles": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "fcb94fa6-14a1-4b4f-b357-9a871ccecb07": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+ "Octaborg": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png", "cc5023bb-9472-41c5-8540-0ee654dc6218": "https://cdn.discordapp.com/attachments/929691316466647100/1041610486141165568/3b836fb393c6e175abf6ab4e397e8f5a76f0d278.png",
+
+ 
+  "use_new_server": false
+}
