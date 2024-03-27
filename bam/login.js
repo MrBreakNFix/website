@@ -39,8 +39,7 @@ function check_creds(username, password) {
             console.log("Credentials are valid, creating cookie");
             // put in 'login' cookie
             document.cookie = "login=" + username + "," + password
-            // redirect to manage.html
-            window.location.replace("/bam/");
+            window.location.replace("index.html");
             console.log("login cookie set");
 
         } else if (response.status === 'invaliduser') {
