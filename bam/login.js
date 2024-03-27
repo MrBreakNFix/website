@@ -40,7 +40,7 @@ function check_creds(username, password) {
             // put in 'login' cookie
             document.cookie = "login=" + username + "," + password
             // redirect to manage.html
-            window.location.replace("mcmanage.html");
+            window.location.replace("/bam/");
             console.log("login cookie set");
 
         } else if (response.status === 'invaliduser') {

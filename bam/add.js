@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOM loaded");
     if (document.cookie.indexOf("login") === -1) {
-        window.location.replace("mclogin.html");
+        window.location.replace("/bam/login.html");
     }
     var username = document.cookie.split("=")[1].split(",")[0];
     var password = document.cookie.split("=")[1].split(",")[1]; // unused for now?

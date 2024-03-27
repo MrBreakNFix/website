@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOM loaded");
-    // check if login cookie exists, if not redirect to mclogin.html
+    // check if login cookie exists, if not redirect to login.html
     if (document.cookie.indexOf("login") === -1) {
-        window.location.replace("mclogin.html");
+        window.location.replace("login.html");
         // check
     }
     // get username from cookie

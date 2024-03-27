@@ -3,5 +3,5 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 function deleteCookie(cookieName) {
     document.cookie = cookieName + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    window.location.href = "mclogin.html";
+    window.location.href = "/bam/login.html";
 }
