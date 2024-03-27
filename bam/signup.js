@@ -30,7 +30,7 @@ function create_user() {
             // put in 'login' cookie
             document.cookie = "login=" + username + "," + password
             // redirect to manage.html
-            window.location.replace("mcmanage.html");
+            window.location.replace("index.html");
             console.log("login cookie set");
 
 

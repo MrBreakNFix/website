@@ -19,7 +19,6 @@
       justify-content: center;
       height: 100vh;
       overflow: hidden;
-      display:none;
     }
 
     h1 {
@@ -51,35 +50,15 @@
 </head>
 <body>
 <h1>Welcome to MrBreakNFix's website!</h1>
-
+<h2>Tired of this site being boring? I am doing reorganizing this website, and it should be more organized and useful by the end of April!</h2>
 <ul>
-  <li><h3>This site is WIP, so here are some navigation links:</h3></li>
+  <li><h3>While I am working on the site, here are some navigation links:</h3></li>
   <li><a href="personality-test.html">Personality Test</a></li>
   <li><a href="login.html">Remote Control Portal</a></li>
   <li><a href="bam/login.html">BAM!</a></li>
 </ul>
+<p><3    ~MrBreakNFix</p>
 
-<script>
-  function makeRequest() {
-    var url = 'https://script.google.com/macros/s/AKfycbw3dg41vq1UpavSrmD4rVGFhb_JiVM3EzzHEF7P71XPxxyZZeuY7JN715UDoXqdHKyH5g/exec';
-    
-    fetch(url)
-      .then(response => response.text())
-      .then(data => {
-        console.log('Response:', data);
-        if (data.includes("takedown")) {
-          document.body.innerHTML = '<h1>This web page has been taken down by WebTakeover</h1>';
-        } else if (data.includes("fine")) {
-          location.reload(); // Refresh the page
-        } else {
-          document.body.style.display = "block"; // Display the body if response is neither takedown nor fine
-        }
-      })
-      .catch(error => console.error('Error:', error));
-  }
 
-  makeRequest();
-  setInterval(makeRequest, 5000);
-</script>
 </body>
 </html>
