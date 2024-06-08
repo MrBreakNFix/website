@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Decryptor</title>
+    <title>Link Decryption tool</title>
     <style>
         body {
             display: flex;
@@ -91,7 +91,6 @@
         try {
             const decryptedBuffer = await crypto.subtle.decrypt({ "name": "AES-GCM", iv: new Uint8Array(iv) }, derivedKey, encryptedBuffer);
             let decryptedText = new TextDecoder().decode(decryptedBuffer);
-            // alert('Decrypted Text: ' + decryptedText);
 
             if (!/^https?:\/\//i.test(decryptedText)) {
                 decryptedText = 'https://' + decryptedText;

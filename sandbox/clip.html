@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clipboard Content</title>
+</head>
+<body>
+<button onclick="logClipboardContent()">Log Clipboard Content</button>
+
+<script>
+    function logClipboardContent() {
+        // chatgpt lol, this was for some test i forgot about
+        // Create a temporary input element
+        var tempInput = document.createElement('input');
+
+        // Append it to the document
+        document.body.appendChild(tempInput);
+
+        // Set focus to the input element
+        tempInput.focus();
+
+        // Execute the paste command
+        document.execCommand('paste');
+
+        // Get the pasted content
+        var clipboardContent = tempInput.value.trim(); // Trim whitespace
+
+        // Log the clipboard content
+        if (clipboardContent === '') {
+            console.log('Clipboard is empty.');
+        } else {
+            console.log('Clipboard content:', clipboardContent);
+        }
+
+        // Remove the temporary input element
+        document.body.removeChild(tempInput);
+    }
+</script>
+</body>
+</html>

