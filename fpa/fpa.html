@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fingerprint Analytics Example</title>
+</head>
+<body>
+<h1>Fingerprint Analytics Information</h1>
+<div id="fingerprint-info"></div>
+
+<script src="FPA.js"></script>
+<script>
+  // Access the fingerprint information collected by FPA.js
+  var fingerprintInfo = window.fpa;
+
+  // Function to format the information for display
+  function formatFingerprintInfo(info) {
+    var formattedInfo = '<ul>' +
+            '<li>User ID: ' + info.userId + '</li>' +
+            '<li>Number of Visits: ' + info.visitCount + '</li>' +
+            '<li>User Agent: ' + info.userAgent + '</li>' +
+            '<li>Language: ' + info.language + '</li>' +
+            '<li>Screen Resolution: ' + info.screenResolution + '</li>' +
+            '<li>Timezone: ' + info.timezone + '</li>' +
+            '<li>Plugins: ' + (info.plugins.join(', ') || 'None') + '</li>' +
+            '<li>Platform: ' + info.platform + '</li>' +
+            '<li>Do Not Track: ' + info.doNotTrack + '</li>' +
+            '<li>Cookies Enabled: ' + info.cookiesEnabled + '</li>' +
+            '<li>Local IP: ' + (info.localIP || 'Not available') + '</li>' +
+            '</ul>';
+    return formattedInfo;
+  }
+
+  // Display the fingerprint information in the HTML document
+  document.getElementById('fingerprint-info').innerHTML = formatFingerprintInfo(fingerprintInfo);
+</script>
+</body>
+</html>
