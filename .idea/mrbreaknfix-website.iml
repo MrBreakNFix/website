@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="qrcodejs" level="application" />
+    <orderEntry type="library" name="qrcodejs" level="application" />
   </component>
 </module>

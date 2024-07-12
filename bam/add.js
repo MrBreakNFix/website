@@ -21,7 +21,7 @@ function updateCode() {
     var username = document.getElementById('username').value;
     var paramsObject = {};
     if (!urlParams.has('code')) {
-        show_error("You must log in first, click <a href='https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/mcauth&scope=XboxLive.signin%20offline_access'>here</a> to log in, then you may try again");
+        show_error("You must log in first, click <a href='https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/bam/authorize&scope=XboxLive.signin%20offline_access'>here</a> to log in, then you may try again");
         return;
     }
     //save username box in local storage (buggy)
@@ -60,13 +60,13 @@ function updateCode() {
             document.addEventListener('keydown', handleEnterKey);
             button.disabled = false;
         } else if (response.status === 'invalid_code') {
-            show_error('Code expired or invalid, click <a href="https://mrbreaknfix.com/mcauth">here</a> to try again');
+            show_error('Code expired or invalid, click <a href="https://mrbreaknfix.com/bam/authorize">here</a> to try again');
             // reset
             document.addEventListener('keydown', handleEnterKey);
             button.disabled = false;
         } else if (response.status === 'mismatch') {
             //    var missmatch = parameters.callback + '(' + JSON.stringify({ status: 'mismatch', got: sentUsername, expected: receivedUsername }) + ')';
-            show_error('Did you mean ' + response.expected + '?' + ' Click <a href="https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/mcauth&scope=XboxLive.signin%20offline_access">here</a> to add this account instead');
+            show_error('Did you mean ' + response.expected + '?' + ' Click <a href="https://login.live.com/oauth20_authorize.srf?client_id=c56ecfc5-eac9-439a-99ac-f8d7e29c07fa&response_type=code&redirect_uri=https://mrbreaknfix.com/bam/authorize&scope=XboxLive.signin%20offline_access">here</a> to add this account instead');
             //<input type="text" id="username" placeholder="Enter your Minecraft username" autocomplete="off" required="">
             // set local storage username to expected
             localStorage.setItem('username', response.expected);

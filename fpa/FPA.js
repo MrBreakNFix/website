@@ -3,19 +3,6 @@
 (function() {
     var fpa = {};
 
-    // Function to generate a unique ID
-    function generateUUID() {
-        var d = new Date().getTime();
-        if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
-            d += performance.now(); // Use high-precision timer if available
-        }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = (d + Math.random()*16)%16 | 0;
-            d = Math.floor(d/16);
-            return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-        });
-    }
-
     // Check if localStorage is available
     function isLocalStorageAvailable() {
         try {
@@ -28,11 +15,10 @@
         }
     }
 
-    // Check number of visits and assign ID
+    // Check number of visits
     if (isLocalStorageAvailable()) {
         if (!localStorage.getItem('fpa_visit_count')) {
             localStorage.setItem('fpa_visit_count', 1);
-            localStorage.setItem('fpa_user_id', generateUUID());
         } else {
             var visitCount = parseInt(localStorage.getItem('fpa_visit_count'));
             localStorage.setItem('fpa_visit_count', visitCount + 1);
@@ -41,28 +27,8 @@
         console.warn('Local storage not available. Cannot track visits.');
     }
 
-    // Store visit count and user ID
+    // Store visit count
     fpa.visitCount = localStorage.getItem('fpa_visit_count') || 'N/A';
-    fpa.userId = localStorage.getItem('fpa_user_id') || 'N/A';
-
-    // Detect incognito mode
-    function detectIncognito(callback) {
-        var fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-        if (!fs) {
-            callback(false);
-        } else {
-            fs(window.TEMPORARY, 1, function() {
-                callback(false);
-            }, function() {
-                callback(true);
-            });
-        }
-    }
-
-    detectIncognito(function(isIncognito) {
-        fpa.incognito = isIncognito ? 'Yes' : 'No';
-        console.log('Incognito mode:', fpa.incognito);
-    });
 
     // User Agent
     fpa.userAgent = navigator.userAgent;
@@ -92,25 +58,6 @@
 
     // Cookies Enabled
     fpa.cookiesEnabled = navigator.cookieEnabled;
-
-    // WebRTC IP Leakage (not fully reliable)
-    var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
-    if (RTCPeerConnection) {
-        var rtc = new RTCPeerConnection({iceServers: []});
-        rtc.createDataChannel('', {reliable: false});
-        rtc.onicecandidate = function(evt) {
-            if (evt.candidate) {
-                fpa.localIP = evt.candidate.candidate.split(' ')[4];
-                rtc.onicecandidate = function() {};
-                console.log('Local IP:', fpa.localIP);
-            }
-        };
-        rtc.createOffer(function(offerDesc) {
-            rtc.setLocalDescription(offerDesc);
-        }, function(e) {
-            console.warn("Couldn't create offer", e);
-        });
-    }
 
     // Output fingerprinting information
     console.log(fpa);

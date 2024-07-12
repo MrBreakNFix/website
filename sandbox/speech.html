@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech Recognition Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #content {
+      text-align: center;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    #log {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="content">
+  <h1>Speech Recognition Example</h1>
+  <p>Click the button and start speaking.</p>
+  <button id="startButton">Start Recognition</button>
+  <div id="output"></div>
+  <div id="log"></div>
+  <button id="copyLogButton">Copy Log</button>
+  <button id="clearLogButton">Clear Log</button>
+</div>
+
+<script>
+  const startButton = document.getElementById('startButton');
+  const output = document.getElementById('output');
+  const logDiv = document.getElementById('log');
+  const copyLogButton = document.getElementById('copyLogButton');
+  const clearLogButton = document.getElementById('clearLogButton');
+  let recognition;
+  let logText = '';
+
+  startButton.addEventListener('click', () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert('Your browser does not support speech recognition. Please use Chrome or Edge.');
+    } else {
+      startButton.disabled = true;
+      startButton.textContent = 'Listening...';
+
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = function() {
+        output.textContent = 'Listening...';
+      };
+
+      recognition.onerror = function(event) {
+        output.textContent = 'Error occurred in recognition: ' + event.error;
+      };
+
+      recognition.onresult = function(event) {
+        let interimTranscript = '';
+        let finalTranscript = '';
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript + '. ';
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+
+        output.innerHTML = '<p><strong>Interim Transcript:</strong> ' + interimTranscript + '</p>' +
+                '<p><strong>Final Transcript:</strong> ' + finalTranscript + '</p>';
+
+        logText += finalTranscript; // Append final transcript to log
+        updateLogDisplay(); // Update log display
+      };
+
+      recognition.onend = function() {
+        startButton.disabled = false;
+        startButton.textContent = 'Start Recognition';
+      };
+
+      recognition.start();
+    }
+  });
+
+  copyLogButton.addEventListener('click', () => {
+    copyToClipboard(logText);
+  });
+
+  clearLogButton.addEventListener('click', () => {
+    logText = '';
+    updateLogDisplay();
+  });
+
+  function updateLogDisplay() {
+    logDiv.textContent = logText;
+  }
+
+  function copyToClipboard(text) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('Log copied to clipboard!');
+  }
+</script>
+</body>
+</html>
