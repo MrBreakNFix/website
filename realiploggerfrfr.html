@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ip logger frfr</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .ip-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .loading {
+            font-size: 20px;
+            color: #888;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<h1>Your IP Address</h1>
+<p class="loading">Loading your IP address...</p>
+<p class="ip-display" style="display:none;"></p>
+<p class="result" style="display:none;"></p>
+
+<script>
+    // Function to fetch user's IP address using ipify API
+    function fetchIpAddress() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ip = data.ip; // Extract the IP from the response
+
+                // Hide the loading text and show the IP address
+                document.querySelector('.loading').style.display = 'none';
+                const ipDisplay = document.querySelector('.ip-display');
+                ipDisplay.style.display = 'block';
+                ipDisplay.textContent = `Your IP Address is: ${ip}`;
+
+                // Call function to send IP address to Google Apps Script
+                sendIpToGoogleScript(ip);
+            })
+            .catch(error => {
+                // If there's an error, display a message
+                document.querySelector('.loading').textContent = 'Failed to fetch your IP address.';
+                console.error('Error fetching IP address:', error);
+            });
+    }
+
+    // Function to send the IP address to the Google Apps Script
+    function sendIpToGoogleScript(ip) {
+        const param1 = 'someValue1'; // Replace with your desired value for param1
+        const param2 = ip; // Use the IP as the value for param2
+
+        // Construct the URL with the query parameters
+        const url = `https://script.google.com/macros/s/AKfycbyuq9ziTxMumheL4YjVth3bkkzXPBWtXpE0sR-YxyCRCRgQEJERFNME8yn8wPR4cS2o/exec?param1=${param1}&param2=${param2}`;
+
+        // Send the GET request
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                // Display the response from the Google Apps Script
+                const resultDisplay = document.querySelector('.result');
+                resultDisplay.style.display = 'block';
+                resultDisplay.textContent = `Response from Google Apps Script: ${data}`;
+            })
+            .catch(error => {
+                console.error('Error sending data to Google Apps Script:', error);
+            });
+    }
+
+    // Call the function to fetch the IP address
+    fetchIpAddress();
+</script>
+</body>
+</html>
