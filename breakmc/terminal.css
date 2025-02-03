@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    background-color: #000;
+    color: #eaeaea;
+    /* Normal: JetBrainsMono-Regular */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+}
+
+#terminal {
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#terminal::-webkit-scrollbar {
+    display: none;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+
+.line {
+    display: flex;
+    align-items: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.prompt-line {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.prompt .user {
+    color: #17c000;
+    margin-right: 2px;
+}
+
+.prompt .at {
+    color: white;
+    margin-right: 2px;
+}
+
+.prompt .host {
+    color: #108cf8;
+}
+
+/* The second part of the prompt: :~$ (with trailing space) */
+.prompt .colon {
+    color: white;
+}
+
+.prompt .tilde {
+    color: yellow;
+    margin-right: 2px;
+}
+
+.prompt .dollar {
+    color: white;
+    margin-right: 12px;
+}
+
+.command {
+    flex: 1;
+    outline: none;
+    background: none;
+    border: none;
+    color: inherit;
+    display: inline-block;
+    position: relative;
+    white-space: pre-wrap;
+    word-wrap: anywhere;
+}
+
+
+/* Always show the text (I-beam) cursor */
+html, body, #terminal, .line, .prompt-line, .command {
+    cursor: text;
+}
+
+
