@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     createWelcomeMessage();
 
     newPrompt();
+    const activeCommand = document.getElementById("activeCommand");
 
     // redirect keys to the prompt
     document.addEventListener("keydown", (e) => {
         // ignore modifier keys
         if (e.ctrlKey || e.metaKey || e.altKey) return;
-        const activeCommand = document.getElementById("activeCommand");
         if (!activeCommand) return;
         if (document.activeElement !== activeCommand) {
             e.preventDefault();
@@ -177,8 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const message = data.message || "";
                     addLine(message);
                 } catch (error) {
-                    //terminal.js:184 Failed to send request:  SyntaxError: Bad control character in string literal in JSON at position 62 (line 1 column 63)
-                    // (anonymous)	@	terminal.js:184
                     const errorMessage = "Error: Failed to send request. (Is BreakMC running, and do the host's match?)";
                     const hint1 = "Hint: You can set your host with the sethost command.";
                     addLine(errorMessage);
@@ -192,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyIndex--;
                     commandSpan.textContent = history[historyIndex];
                 }
-                moveCursorToEnd(commandSpan);
+                moveCursorToEnd(activeCommand);
             } else if (event.key === "ArrowDown") {
                 event.preventDefault();
                 if (historyIndex < history.length - 1) {
@@ -202,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyIndex = history.length;
                     commandSpan.textContent = "";
                 }
-                moveCursorToEnd(commandSpan);
+                moveCursorToEnd(activeCommand);
             }
         });
     }
