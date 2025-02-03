@@ -8,44 +8,45 @@ document.addEventListener("DOMContentLoaded", () => {
     createWelcomeMessage();
 
     newPrompt();
-    const activeCommand = document.getElementById("activeCommand");
 
     // redirect keys to the prompt
     document.addEventListener("keydown", (e) => {
         // ignore modifier keys
         if (e.ctrlKey || e.metaKey || e.altKey) return;
+        const activeCommand = document.getElementById("activeCommand");
         if (!activeCommand) return;
         if (document.activeElement !== activeCommand) {
             e.preventDefault();
             activeCommand.focus();
-
-            // move cursor to the end
-            const range = document.createRange();
-            const sel = window.getSelection();
-            range.selectNodeContents(activeCommand);
-            range.collapse(false);
-            sel.removeAllRanges();
-            sel.addRange(range);
         }
 
         if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
-            e.preventDefault();
-            activeCommand.textContent += e.key;
-            moveCursorToEnd(activeCommand);
+            // e.preventDefault();
+            // let sel = window.getSelection();
+            // activeCommand.textContent = activeCommand.textContent.slice(0, sel.anchorOffset) + e.key + activeCommand.textContent.slice(sel.anchorOffset);
+            // sel.collapse(activeCommand.firstChild, sel.anchorOffset + 1);
+
         } else if (e.key === "Backspace") {
             e.preventDefault();
-            activeCommand.textContent = activeCommand.textContent.slice(0, -1);
-            moveCursorToEnd(activeCommand);
+            // activeCommand.textContent = activeCommand.textContent.slice(0, -1);
+            let sel = window.getSelection();
+            const text = activeCommand.textContent;
+            const start = sel.anchorOffset;
+            const end = sel.focusOffset;
+            const newText = text.slice(0, start - 1) + text.slice(end);
+            activeCommand.textContent = newText;
+            sel.collapse(activeCommand.firstChild, start - 1);
+
         }
     });
 
     function moveCursorToEnd(el) {
-        const range = document.createRange();
-        const sel = window.getSelection();
-        range.selectNodeContents(el);
-        range.collapse(false);
-        sel.removeAllRanges();
-        sel.addRange(range);
+        // const range = document.createRange();
+        // const sel = window.getSelection();
+        // range.selectNodeContents(el);
+        // range.collapse(false);
+        // sel.removeAllRanges();
+        // sel.addRange(range);
     }
 
 
@@ -190,7 +191,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyIndex--;
                     commandSpan.textContent = history[historyIndex];
                 }
-                moveCursorToEnd(activeCommand);
+
+                // move cursor to the end
+                moveCursorToEnd(commandSpan);
             } else if (event.key === "ArrowDown") {
                 event.preventDefault();
                 if (historyIndex < history.length - 1) {
@@ -200,7 +203,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyIndex = history.length;
                     commandSpan.textContent = "";
                 }
-                moveCursorToEnd(activeCommand);
+
+                // move cursor to the end
+                moveCursorToEnd(commandSpan);
             }
         });
     }
