@@ -192,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyIndex--;
                     commandSpan.textContent = history[historyIndex];
                 }
+                moveCursorToEnd(commandSpan);
             } else if (event.key === "ArrowDown") {
                 event.preventDefault();
                 if (historyIndex < history.length - 1) {
@@ -201,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyIndex = history.length;
                     commandSpan.textContent = "";
                 }
+                moveCursorToEnd(commandSpan);
             }
         });
     }
