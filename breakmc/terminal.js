@@ -181,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const hint1 = "Hint: You can set your host with the sethost command.";
                     addLine(errorMessage);
                     addLine(hint1);
+                    console.error("Failed to send request: ", error);
                 }
                 newPrompt();
             } else if (event.key === "ArrowUp") {
