@@ -242,5 +242,8 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("api")) {
     const newHost = urlParams.get("api");
     localStorage.setItem("apiHost", newHost);
+    urlParams.delete("api");
+    const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+    window.history.replaceState({}, document.title, newUrl);
     location.reload();
 }
