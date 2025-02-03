@@ -174,9 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         body: command
                     });
                     const data = await response.json();
-                    const message = data.message || "No response";
+                    const message = data.message || "";
                     addLine(message);
                 } catch (error) {
+                    //terminal.js:184 Failed to send request:  SyntaxError: Bad control character in string literal in JSON at position 62 (line 1 column 63)
+                    // (anonymous)	@	terminal.js:184
                     const errorMessage = "Error: Failed to send request. (Is BreakMC running, and do the host's match?)";
                     const hint1 = "Hint: You can set your host with the sethost command.";
                     addLine(errorMessage);
