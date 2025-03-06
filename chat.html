@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .chat-header {
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .chat-header input {
+            margin-left: 10px;
+            padding: 5px;
+            font-size: 1rem;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            background: #fff;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message .username {
+            font-weight: bold;
+        }
+        .chat-input {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #eee;
+        }
+        .chat-input input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        .chat-input button {
+            padding: 10px 15px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+    <div class="chat-header">
+        <h1>Chat App</h1>
+        <label>
+            Username:
+            <input type="text" id="username" placeholder="Enter username" value="User1">
+        </label>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input">
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button id="sendButton">Send</button>
+    </div>
+</div>
+
+<!-- Include ggwave JavaScript library -->
+<script type="text/javascript" src="ggwave.js"></script>
+<script type="text/javascript">
+    // Ensure AudioContext compatibility
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    window.OfflineAudioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+
+    // Audio and ggwave variables
+    var context = null;
+    var recorder = null;
+    var ggwave = null;
+    var parameters = null;
+    var instance = null;
+    var mediaStream = null;
+
+    // Chat UI elements
+    var chatMessages = document.getElementById("chatMessages");
+    var usernameInput = document.getElementById("username");
+    var messageInput = document.getElementById("messageInput");
+    var sendButton = document.getElementById("sendButton");
+
+    // Initialize ggwave module
+    ggwave_factory().then(function(obj) {
+        ggwave = obj;
+    });
+
+    // Initialize AudioContext and ggwave instance if not already done
+    function init() {
+        if (!context) {
+            context = new AudioContext({sampleRate: 48000});
+            parameters = ggwave.getDefaultParameters();
+            parameters.sampleRateInp = context.sampleRate;
+            parameters.sampleRateOut = context.sampleRate;
+            instance = ggwave.init(parameters);
+        }
+    }
+
+    // Helper function for converting typed arrays
+    function convertTypedArray(src, type) {
+        var buffer = new ArrayBuffer(src.byteLength);
+        new src.constructor(buffer).set(src);
+        return new type(buffer);
+    }
+
+    // Function to add a chat message to the UI
+    function addMessage(user, message) {
+        var messageDiv = document.createElement("div");
+        messageDiv.className = "message";
+        messageDiv.innerHTML = "<span class='username'>" + user + ":</span> " + message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Function to send a message via ggwave
+    function onSend() {
+        init();
+        var username = usernameInput.value.trim() || "Anonymous";
+        var message = messageInput.value.trim();
+        if (message === "") return;
+
+        // Package username and message into a JSON string with minimal keys: u and m
+        var data = JSON.stringify({u: username, m: message});
+
+        // Display the message immediately in the chat window
+        // addMessage(username, message);
+
+        // Encode the JSON string into an audio waveform
+        var waveform = ggwave.encode(instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 10);
+
+        // Play the generated audio signal
+        var buf = convertTypedArray(waveform, Float32Array);
+        var buffer = context.createBuffer(1, buf.length, context.sampleRate);
+        buffer.getChannelData(0).set(buf);
+        var source = context.createBufferSource();
+        source.buffer = buffer;
+        source.connect(context.destination);
+        source.start(0);
+
+        // Clear the input for the next message
+        messageInput.value = "";
+    }
+
+    // Function to continuously capture audio for receiving messages
+    function startCapturing() {
+        init();
+        let constraints = {
+            audio: {
+                echoCancellation: false,
+                autoGainControl: false,
+                noiseSuppression: false
+            }
+        };
+        navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+            mediaStream = context.createMediaStreamSource(stream);
+            var bufferSize = 1024;
+            var numberOfInputChannels = 1;
+            var numberOfOutputChannels = 1;
+
+            // Create a script processor node for capturing audio
+            recorder = (context.createScriptProcessor || context.createJavaScriptNode).call(context, bufferSize, numberOfInputChannels, numberOfOutputChannels);
+
+            recorder.onaudioprocess = function(e) {
+                var source = e.inputBuffer;
+                // Decode the received audio data
+                var res = ggwave.decode(instance, convertTypedArray(new Float32Array(source.getChannelData(0)), Int8Array));
+                if (res && res.length > 0) {
+                    try {
+                        var decoded = new TextDecoder("utf-8").decode(res);
+                        // Expecting a JSON formatted string with minimal keys u and m
+                        var obj = JSON.parse(decoded);
+                        addMessage(obj.u, obj.m);
+                    } catch (err) {
+                        console.error("Error parsing received message: ", err);
+                    }
+                }
+            };
+
+            mediaStream.connect(recorder);
+            recorder.connect(context.destination);
+        }).catch(function(e) {
+            console.error(e);
+        });
+    }
+
+    // Event listeners for sending messages
+    sendButton.addEventListener("click", onSend);
+    messageInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            onSend();
+            e.preventDefault();
+        }
+    });
+
+    // Automatically start capturing as soon as the page loads
+    window.addEventListener("load", startCapturing);
+</script>
+</body>
+</html>
