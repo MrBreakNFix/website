@@ -59,7 +59,7 @@
 <body>
 <div class="chat-container">
     <div class="chat-header">
-        <h1>Chat App (mk2)</h1>
+        <h1>Chat App (mk3)</h1>
         <label>
             Username:
             <input type="text" id="username" placeholder="Enter username" value="User1">
@@ -97,21 +97,17 @@
 
     // Initialize ggwave module
     ggwave_factory().then(function(obj) {
-        ggwave = obj; // Set ggwave to the returned object after initialization
+        ggwave = obj;
         console.log("ggwave initialized successfully!");
     }).catch(function(error) {
-        console.error("Failed to initialize ggwave: ", error);
+        console.error("Failed to initialize ggwave:", error);
     });
 
     // Initialize AudioContext and ggwave instance if not already done
     function init() {
-        if (ggwave === null) {
-            console.error("ggwave not initialized yet");
-            return;
-        }
         if (!context) {
-            context = new AudioContext({ sampleRate: 48000 });
-            parameters = ggwave.getDefaultParameters();  // This should now work after ggwave is initialized
+            context = new AudioContext({sampleRate: 48000});
+            parameters = ggwave.getDefaultParameters();
             parameters.sampleRateInp = context.sampleRate;
             parameters.sampleRateOut = context.sampleRate;
             instance = ggwave.init(parameters);
@@ -136,13 +132,18 @@
 
     // Function to send a message via ggwave
     function onSend() {
+        if (!ggwave) {
+            console.log("ggwave not initialized yet");
+            return;
+        }
+
         init();
         var username = usernameInput.value.trim() || "Anonymous";
         var message = messageInput.value.trim();
         if (message === "") return;
 
         // Package username and message into a JSON string with minimal keys: u and m
-        var data = JSON.stringify({ u: username, m: message });
+        var data = JSON.stringify({u: username, m: message});
 
         // Encode the JSON string into an audio waveform
         var waveform = ggwave.encode(instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 10);
@@ -162,13 +163,12 @@
 
     // Function to continuously capture audio for receiving messages
     function startCapturing() {
-        if (ggwave === null) {
-            console.error("ggwave not initialized yet");
-            return;
+        if (!ggwave) {
+            console.log("ggwave not initialized yet");
+            return;  // Exit if ggwave is not initialized
         }
 
-        init();  // Initialize if not already initialized
-
+        init();
         let constraints = {
             audio: {
                 echoCancellation: false,
@@ -176,7 +176,6 @@
                 noiseSuppression: false
             }
         };
-
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
             mediaStream = context.createMediaStreamSource(stream);
             var bufferSize = 1024;
@@ -219,7 +218,15 @@
     });
 
     // Automatically start capturing as soon as the page loads
-    window.addEventListener("load", startCapturing);
+    window.addEventListener("load", function() {
+        ggwave_factory().then(function(obj) {
+            ggwave = obj;
+            console.log("ggwave initialized successfully!");
+            startCapturing();  // Call startCapturing after ggwave is initialized
+        }).catch(function(error) {
+            console.error("Failed to initialize ggwave:", error);
+        });
+    });
 </script>
 </body>
 </html>
