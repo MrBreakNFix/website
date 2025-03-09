@@ -59,7 +59,7 @@
 <body>
 <div class="chat-container">
     <div class="chat-header">
-        <h1>Chat App (mk3)</h1>
+        <h1>Chat App (mk4)</h1>
         <label>
             Username:
             <input type="text" id="username" placeholder="Enter username" value="User1">
@@ -146,7 +146,7 @@
         var data = JSON.stringify({u: username, m: message});
 
         // Encode the JSON string into an audio waveform
-        var waveform = ggwave.encode(instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 10);
+        var waveform = ggwave.encode(instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_ULTRASOUND_FASTEST, 10);
 
         // Play the generated audio signal
         var buf = convertTypedArray(waveform, Float32Array);
