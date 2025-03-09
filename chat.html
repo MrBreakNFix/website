@@ -59,7 +59,7 @@
 <body>
 <div class="chat-container">
     <div class="chat-header">
-        <h1>Chat App</h1>
+        <h1>Chat App (mk2)</h1>
         <label>
             Username:
             <input type="text" id="username" placeholder="Enter username" value="User1">
@@ -97,14 +97,21 @@
 
     // Initialize ggwave module
     ggwave_factory().then(function(obj) {
-        ggwave = obj;
+        ggwave = obj; // Set ggwave to the returned object after initialization
+        console.log("ggwave initialized successfully!");
+    }).catch(function(error) {
+        console.error("Failed to initialize ggwave: ", error);
     });
 
     // Initialize AudioContext and ggwave instance if not already done
     function init() {
+        if (ggwave === null) {
+            console.error("ggwave not initialized yet");
+            return;
+        }
         if (!context) {
-            context = new AudioContext({sampleRate: 48000});
-            parameters = ggwave.getDefaultParameters();
+            context = new AudioContext({ sampleRate: 48000 });
+            parameters = ggwave.getDefaultParameters();  // This should now work after ggwave is initialized
             parameters.sampleRateInp = context.sampleRate;
             parameters.sampleRateOut = context.sampleRate;
             instance = ggwave.init(parameters);
@@ -135,10 +142,7 @@
         if (message === "") return;
 
         // Package username and message into a JSON string with minimal keys: u and m
-        var data = JSON.stringify({u: username, m: message});
-
-        // Display the message immediately in the chat window
-        // addMessage(username, message);
+        var data = JSON.stringify({ u: username, m: message });
 
         // Encode the JSON string into an audio waveform
         var waveform = ggwave.encode(instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 10);
@@ -158,7 +162,13 @@
 
     // Function to continuously capture audio for receiving messages
     function startCapturing() {
-        init();
+        if (ggwave === null) {
+            console.error("ggwave not initialized yet");
+            return;
+        }
+
+        init();  // Initialize if not already initialized
+
         let constraints = {
             audio: {
                 echoCancellation: false,
@@ -166,6 +176,7 @@
                 noiseSuppression: false
             }
         };
+
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
             mediaStream = context.createMediaStreamSource(stream);
             var bufferSize = 1024;
