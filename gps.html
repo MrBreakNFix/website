@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Location</title>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; width: 100%; }
+    </style>
+</head>
+<body>
+<h1>GPS</h1>
+<button onclick="getLocation()">Get My Location</button>
+<p id="status"></p>
+<div id="map"></div>
+
+<script>
+    let map;
+    let accuracyCircle;
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError, {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            });
+        } else {
+            document.getElementById("status").innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+        const altitude = position.coords.altitude || 'N/A';
+        const speed = position.coords.speed || 'N/A';
+        const heading = position.coords.heading || 'N/A';
+        const timestamp = position.timestamp;
+
+        let locationMethod = 'Unknown';
+        if (accuracy <= 10) {
+            locationMethod = 'GPS (high accuracy)';
+        } else if (accuracy <= 100) {
+            locationMethod = 'GPS (medium accuracy)';
+        } else if (accuracy <= 500) {
+            locationMethod = 'Wi-Fi or Cellular (medium accuracy)';
+        } else {
+            locationMethod = 'Wi-Fi or Cellular (low accuracy)';
+        }
+
+        document.getElementById("status").innerHTML = `
+                Latitude: ${lat}<br>
+                Longitude: ${lon}<br>
+                Accuracy: ±${accuracy} meters<br>
+                Altitude: ${altitude} meters<br>
+                Speed: ${speed} m/s<br>
+                Heading: ${heading}°<br>
+                Timestamp: ${new Date(timestamp).toLocaleString()}<br>
+                Estimated Location Method: ${locationMethod}
+            `;
+
+        if (!map) {
+            map = L.map('map').setView([lat, lon], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+        } else {
+            map.setView([lat, lon], 15);
+        }
+
+        if (accuracyCircle) {
+            map.removeLayer(accuracyCircle);
+        }
+
+        accuracyCircle = L.circle([lat, lon], {
+            color: 'blue',
+            fillColor: '#30f',
+            fillOpacity: 0.2,
+            radius: accuracy
+        }).addTo(map);
+
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup(`You are here.<br>Accuracy: ±${accuracy} meters`)
+            .openPopup();
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                document.getElementById("status").innerHTML = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                document.getElementById("status").innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                document.getElementById("status").innerHTML = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                document.getElementById("status").innerHTML = "An unknown error occurred.";
+                break;
+        }
+    }
+</script>
+</body>
+</html>
+
+
