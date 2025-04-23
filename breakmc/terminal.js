@@ -174,21 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         headers: { "Content-Type": "text/plain" },
                         body: command
                     });
-
                     const data = await response.json();
-
-                    if (Array.isArray(data.results)) {
-                        // New format: multiple command results
-                        for (const result of data.results) {
-                            const prefix = result.success ? "" : "[Error] ";
-                            addLine(prefix + result.message);
-                        }
-                    } else {
-                        // Fallback to old format
-                        const message = data.message || "";
-                        addLine(message);
-                    }
-
+                    const message = data.message || "";
+                    addLine(message);
                 } catch (error) {
                     const errorMessage = "Error: Failed to send request. (Is BreakMC running, and do the host's match?)";
                     const hint1 = "Hint: You can set your host with the sethost command.";
@@ -196,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     addLine(hint1);
                     console.error("Failed to send request: ", error);
                 }
-
                 newPrompt();
             } else if (event.key === "ArrowUp") {
                 event.preventDefault();
